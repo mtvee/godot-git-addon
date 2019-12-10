@@ -6,6 +6,8 @@ var git_command = 'git'
 onready var commit_message = $HSplitContainer/VSplitContainer/VSplitContainer/CommitMessage
 onready var git_output = $HSplitContainer/VSplitContainer/VSplitContainer2/Output
 
+const tmp_filename = 'gitcommit.txt'
+
 func _ready():
 	if OS.get_name() == 'Windows':
 		git_command = 'git.exe'
@@ -20,10 +22,12 @@ func _on_Commit_pressed():
 	for i in range(count):
 		msg = msg + commit_message.get_line(i) + "\n"
 	var tmp_file = File.new()
-	tmp_file.open("junk.tmp", File.WRITE)
+	tmp_file.open(tmp_filename, File.WRITE)
 	tmp_file.store_line(msg)
 	tmp_file.close()
-	run_commmand(['commit', '-a', '-F', 'junk.tmp'])
+	run_commmand(['commit', '-a', '-F', tmp_filename])
+	var dir = Directory.new()
+	dir.remove(tmp_filename)
 	
 func _on_Push_pressed():
 	run_commmand(['push'])
