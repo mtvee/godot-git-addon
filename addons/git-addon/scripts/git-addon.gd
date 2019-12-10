@@ -1,5 +1,5 @@
 # ----------------------------------------------
-#            ~{ GitHub Integration }~
+#            ~{ Git Integration }~
 # [Author] Jimi 
 # [github] mtvee/git-addon
 # [version] 0.1.0
@@ -11,19 +11,17 @@ extends EditorPlugin
 var doc = preload("../scenes/Git.tscn").instance()
 
 func _enter_tree():
-	#add_autoload_singleton("UserData","res://addons/github-integration/scripts/user_data.gd")
-	#add_autoload_singleton("IconLoaderGithub","res://addons/github-integration/scripts/IconLoaderGithub.gd")
 	get_editor_interface().get_editor_viewport().add_child(doc)
 	doc.hide()
 
-
 func _exit_tree():
 	get_editor_interface().get_editor_viewport().remove_child(doc)
-	#remove_autoload_singleton("UserData")
-	#remove_autoload_singleton("IconLoaderGithub")
 
 func has_main_screen():
 	return true
+
+func get_plugin_icon():
+	return "res://addons/git-addon/images/icons8-git-48.png"
 
 func get_plugin_name():
 	return "Git"
