@@ -18,3 +18,17 @@ Why?
 I got annoyed with windows not having a real terminal so I wanted to do 
 basic operations from within Godot. That's all :)
 
+TODO (someday):
+---------------
+
+- add some colors to output
+- how to add icon to top bar?
+- add new files to git somehow
+- open proper client from here or editor maybe?
+
+Attributions
+------------
+
+Icon pilfered from Icons8 https://icons8.com/icons/set/git
+
+
