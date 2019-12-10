@@ -11,7 +11,6 @@ const tmp_filename = 'gitcommit.txt'
 func _ready():
 	if OS.get_name() == 'Windows':
 		git_command = 'git.exe'
-	pass # Replace with function body.
 
 func _on_Status_pressed():
 	run_commmand(['status'])
@@ -19,6 +18,12 @@ func _on_Status_pressed():
 func _on_Commit_pressed():
 	var msg = ''
 	var count = commit_message.get_line_count()
+	if count == 1 and commit_message.get_line(0) == '':
+		var diag = AcceptDialog.new()
+		diag.get_label().text = "No commit message"
+		self.add_child(diag)
+		diag.popup_centered()
+		return
 	for i in range(count):
 		msg = msg + commit_message.get_line(i) + "\n"
 	var tmp_file = File.new()
