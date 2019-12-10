@@ -12,6 +12,12 @@ This, presently, just handles the following git commands
 - pull
 - push
 
+Requires
+--------
+
+- written in Godot 3.1.2
+- needs `git` on the path
+
 Why?
 ----
 
