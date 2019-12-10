@@ -1,0 +1,90 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://addons/git-addon/scenes/Git.gd" type="Script" id=1]
+[ext_resource path="res://addons/git-addon/images/icons8-git-48.png" type="Texture" id=2]
+
+[node name="Git" type="MarginContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = 20.0
+margin_right = -20.0
+margin_bottom = -20.0
+script = ExtResource( 1 )
+
+[node name="HSplitContainer" type="HSplitContainer" parent="."]
+margin_right = 984.0
+margin_bottom = 560.0
+
+[node name="GridContainer" type="GridContainer" parent="HSplitContainer"]
+margin_right = 63.0
+margin_bottom = 560.0
+
+[node name="TextureRect" type="TextureRect" parent="HSplitContainer/GridContainer"]
+margin_right = 63.0
+margin_bottom = 48.0
+texture = ExtResource( 2 )
+
+[node name="Status" type="Button" parent="HSplitContainer/GridContainer"]
+margin_top = 52.0
+margin_right = 63.0
+margin_bottom = 72.0
+text = "Status"
+
+[node name="Commit" type="Button" parent="HSplitContainer/GridContainer"]
+margin_top = 76.0
+margin_right = 63.0
+margin_bottom = 96.0
+text = "Commit"
+
+[node name="Push" type="Button" parent="HSplitContainer/GridContainer"]
+margin_top = 100.0
+margin_right = 63.0
+margin_bottom = 120.0
+text = "Push"
+
+[node name="Pull" type="Button" parent="HSplitContainer/GridContainer"]
+margin_top = 124.0
+margin_right = 63.0
+margin_bottom = 144.0
+text = "Pull"
+
+[node name="VSplitContainer" type="VSplitContainer" parent="HSplitContainer"]
+margin_left = 75.0
+margin_right = 984.0
+margin_bottom = 560.0
+
+[node name="VSplitContainer" type="VSplitContainer" parent="HSplitContainer/VSplitContainer"]
+margin_right = 909.0
+margin_bottom = 126.0
+
+[node name="Label" type="Label" parent="HSplitContainer/VSplitContainer/VSplitContainer"]
+margin_right = 909.0
+margin_bottom = 14.0
+text = "Commit Message"
+
+[node name="CommitMessage" type="TextEdit" parent="HSplitContainer/VSplitContainer/VSplitContainer"]
+margin_top = 26.0
+margin_right = 909.0
+margin_bottom = 126.0
+rect_min_size = Vector2( 0, 100 )
+
+[node name="VSplitContainer2" type="VSplitContainer" parent="HSplitContainer/VSplitContainer"]
+margin_top = 138.0
+margin_right = 909.0
+margin_bottom = 560.0
+
+[node name="Label2" type="Label" parent="HSplitContainer/VSplitContainer/VSplitContainer2"]
+margin_right = 909.0
+margin_bottom = 14.0
+text = "Output"
+
+[node name="Output" type="TextEdit" parent="HSplitContainer/VSplitContainer/VSplitContainer2"]
+margin_top = 26.0
+margin_right = 909.0
+margin_bottom = 422.0
+readonly = true
+[connection signal="pressed" from="HSplitContainer/GridContainer/Status" to="." method="_on_Status_pressed"]
+[connection signal="pressed" from="HSplitContainer/GridContainer/Commit" to="." method="_on_Commit_pressed"]
+[connection signal="pressed" from="HSplitContainer/GridContainer/Push" to="." method="_on_Push_pressed"]
+[connection signal="pressed" from="HSplitContainer/GridContainer/Pull" to="." method="_on_Pull_pressed"]
