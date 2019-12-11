@@ -13,6 +13,7 @@ This, presently, just handles the following git commands
 - commit
 - pull
 - push
+- add
 
 Requires
 --------
@@ -29,9 +30,6 @@ basic operations from within Godot. That's all :)
 TODO (someday):
 ---------------
 
-- add some colors to output
-- how to add icon to top bar?
-- add new files to git somehow
 - open proper client from here or editor maybe?
 
 Attributions
