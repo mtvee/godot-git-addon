@@ -54,6 +54,11 @@ func _on_Status_pressed():
 			var cnt = git_files.get_item_count()
 			git_files.set_item_custom_fg_color(cnt-1, Color.cyan)
 			git_files.set_item_metadata(cnt-1, 'A')
+		if code == 'D ':
+			git_files.add_item(fname, status_deleted)
+			var cnt = git_files.get_item_count()
+			git_files.set_item_custom_fg_color(cnt-1, Color.red)
+			git_files.set_item_metadata(cnt-1, 'D')
 				
 	
 func _on_Commit_pressed():
