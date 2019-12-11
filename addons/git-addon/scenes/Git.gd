@@ -19,6 +19,7 @@ const tmp_filename = 'gitcommit.txt'
 
 var popup
 
+# change the executable name for windows
 func _ready():
 	if OS.get_name() == 'Windows':
 		git_command = 'git.exe'
