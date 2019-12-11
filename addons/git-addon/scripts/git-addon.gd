@@ -21,7 +21,8 @@ func has_main_screen():
 	return true
 
 func get_plugin_icon():
-	return load("res://addons/git-addon/images/icons8-git-18.png")
+	var img = load("res://addons/git-addon/images/icons8-git-18.png")
+	return img
 
 func get_plugin_name():
 	return "Git"
