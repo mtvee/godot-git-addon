@@ -79,6 +79,7 @@ func _on_Commit_pressed():
 	run_commmand(['commit', '-a', '-F', tmp_filename])
 	var dir = Directory.new()
 	dir.remove(tmp_filename)
+	_on_Status_pressed()
 	
 func _on_Push_pressed():
 	run_commmand(['push'])
