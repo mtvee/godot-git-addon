@@ -16,22 +16,34 @@ onready var status_untracked = load("res://addons/git-addon/images/plus-18.png")
 onready var status_deleted = load("res://addons/git-addon/images/zap-18.png")
 
 const tmp_filename = 'gitcommit.txt'
+var popup
+
 
 # change the executable name for windows
 func _ready():
 	if OS.get_name() == 'Windows':
 		git_command = 'git.exe'
 	$HSplitContainer/GridContainer/Add.disabled = true
+	popup = AcceptDialog.new()
+	self.add_child(popup)
 
 # runs the git_command with args
+# TODO: this thing doesn't seem to capture stderr output so probably have to use some
+# redirected voodoo. Also doesn't return the return value from the process, ugh.
+# Need to figure out how to do that in windows	
+# note: fixed push by adding --porcelain so output goes to stdout
 func run_commmand( args ):
 	git_output.text = ''
 	var output = []
 	OS.execute(git_command, args, true, output)
+	# if we got nothing indicate an error
+	if len(output) == 1 and len(output[0]) == 0:
+		popup.dialog_text = "Something went wrong\n\ncheck the godot console output"
+		popup.popup_centered()
 	for line in output:
 		git_output.insert_text_at_cursor(line)
 
-
+# able/disable buttons and whatnot
 func update_ui():
 	var items = git_files.get_selected_items()
 	if len(items) == 0:
@@ -105,7 +117,7 @@ func _on_Commit_pressed():
 	_on_Status_pressed()
 	
 func _on_Push_pressed():
-	run_commmand(['push'])
+	run_commmand(['push', '--porcelain'])
 
 func _on_Pull_pressed():
 	run_commmand(['pull'])
