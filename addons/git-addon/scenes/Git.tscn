@@ -152,3 +152,4 @@ readonly = true
 [connection signal="pressed" from="HSplitContainer/GridContainer/SelAll" to="." method="_on_SelAll_pressed"]
 [connection signal="pressed" from="HSplitContainer/GridContainer/SelUntracked" to="." method="_on_SelUntracked_pressed"]
 [connection signal="pressed" from="HSplitContainer/GridContainer/SelNone" to="." method="_on_SelNone_pressed"]
+[connection signal="multi_selected" from="HSplitContainer/VSplitContainer/Tabs/FilesList" to="." method="_on_FilesList_multi_selected"]

@@ -17,15 +17,35 @@ onready var status_deleted = load("res://addons/git-addon/images/zap-18.png")
 
 const tmp_filename = 'gitcommit.txt'
 
-var popup
-
 # change the executable name for windows
 func _ready():
 	if OS.get_name() == 'Windows':
 		git_command = 'git.exe'
-	popup = PopupMenu.new()
+	$HSplitContainer/GridContainer/Add.disabled = true
+
+# runs the git_command with args
+func run_commmand( args ):
+	git_output.text = ''
+	var output = []
+	OS.execute(git_command, args, true, output)
+	for line in output:
+		git_output.insert_text_at_cursor(line)
 
 
+func update_ui():
+	var items = git_files.get_selected_items()
+	if len(items) == 0:
+		$HSplitContainer/GridContainer/Add.disabled = true
+		return
+	var have_additions = false
+	for item in items:
+		if git_files.get_item_metadata(item) == '?':	
+			have_additions = true
+			
+	if have_additions:
+		$HSplitContainer/GridContainer/Add.disabled = false
+				
+			
 func _on_Status_pressed():
 	run_commmand(['status'])
 	var output = []
@@ -61,7 +81,9 @@ func _on_Status_pressed():
 			git_files.set_item_custom_fg_color(cnt-1, Color.red)
 			git_files.set_item_metadata(cnt-1, 'D')
 				
-	
+			$HSplitContainer/GridContainer/Add.disabled = true
+	update_ui()
+
 func _on_Commit_pressed():
 	var msg = ''
 	var count = commit_message.get_line_count()
@@ -94,25 +116,22 @@ func _on_Add_pressed():
 		run_commmand(['add', git_files.get_item_text(ndx)])		
 	_on_Status_pressed()
 
-# runs the git_command with args
-func run_commmand( args ):
-	git_output.text = ''
-	var output = []
-	OS.execute(git_command, args, true, output)
-	for line in output:
-		git_output.insert_text_at_cursor(line)
-	
-
 func _on_SelAll_pressed():
 	git_files.unselect_all()
 	for idx in range(git_files.get_item_count()):
 		git_files.select(idx, false)
+	update_ui()
 
 func _on_SelUntracked_pressed():
 	git_files.unselect_all()
 	for idx in range(git_files.get_item_count()):
 		if git_files.get_item_metadata(idx) == '?':
 			git_files.select(idx, false)
+	update_ui()
 
 func _on_SelNone_pressed():
 	git_files.unselect_all()
+	update_ui()
+
+func _on_FilesList_multi_selected(index, selected):
+	update_ui()
